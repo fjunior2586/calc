@@ -1,0 +1,128 @@
+import React, { useState } from 'react';
+import { StyleSheet, Text, View, SafeAreaView , StatusBar} from 'react-native';
+
+
+export default function App() extends React.Component {
+  const [count, setCount] = useState("");
+  const [result, setResult] = useState(0);
+
+  btn(b){
+    let s = this.state;
+    if (b == 'C'){
+      s.r = '0';
+    }else if(b == '='){
+      s.r = eval(s.r);
+    }else{
+      if(s.r =='0' && b !='.'){
+        s.r = b;
+      }else{
+        s.r += b;
+      }
+    }
+    this.setState(s);
+  }
+  return (
+    <>
+      <StatusBar backgroundColor="#23222D" translucent={false} hidden={false}/>
+      <SafeAreaView style={styles.container}>
+        <View style={styles.display}>
+          <Text style={styles.operetion}>{count}</Text>
+         
+          <Text style={styles.result} >{result}</Text>
+        </View>
+        <View style={styles.buttons}>
+          <View style={styles.line}>
+            <Text style={[styles.button, styles.margin, styles.colorGreen]} onPress={() => setCount(count => "")}>AC</Text>
+            <Text style={[styles.button, styles.margin, styles.colorGreen]} >+/-</Text>
+            <Text style={[styles.button, styles.margin, styles.colorGreen]} onPress={() => setCount(count => count+"%")}>%</Text>
+            <Text style={[styles.button, styles.margin, styles.colorRed]} onPress={() => setCount(count => count+"/")}>/</Text>
+          </View>
+          <View style={styles.line}>
+            <Text style={[styles.button, styles.margin, styles.colorWhite]} onPress={() => setCount(count => count+"7")}>7</Text>
+            <Text style={[styles.button, styles.margin, styles.colorWhite]} onPress={() => setCount(count => count+"8")}>8</Text>
+            <Text style={[styles.button, styles.margin, styles.colorWhite]} onPress={() => setCount(count => count+"9")}>9</Text>
+            <Text style={[styles.button, styles.margin, styles.colorRed]} onPress={() => setCount(count => count+"*")}>X</Text>
+          </View>
+          <View style={styles.line}>
+            <Text style={[styles.button, styles.margin, styles.colorWhite]} onPress={() => setCount(count => count+"4")}>4</Text>
+            <Text style={[styles.button, styles.margin, styles.colorWhite]} onPress={() => setCount(count => count+"5")}>5</Text>
+            <Text style={[styles.button, styles.margin, styles.colorWhite]} onPress={() => setCount(count => count+"6")}>6</Text>
+            <Text style={[styles.button, styles.margin, styles.colorRed]} onPress={() => setCount(count => count+"-")}>-</Text>
+          </View>
+          <View style={styles.line}>
+            <Text style={[styles.button, styles.margin, styles.colorWhite]} onPress={() => setCount(count => count+"1")}>1</Text>
+            <Text style={[styles.button, styles.margin, styles.colorWhite]} onPress={() => setCount(count => count+"2")}>2</Text>
+            <Text style={[styles.button, styles.margin, styles.colorWhite]} onPress={() => setCount(count => count+"3")}>3</Text>
+            <Text style={[styles.button, styles.margin, styles.colorRed]} onPress={() => setCount(count => count+"+")}>+</Text>
+          </View>
+          <View style={styles.line}>
+            <Text style={[styles.button, styles.margin, styles.colorWhite]}>r</Text>
+            <Text style={[styles.button, styles.margin, styles.colorWhite]} onPress={() => setCount(count => count+"0")}>0</Text>
+            <Text style={[styles.button, styles.margin, styles.colorWhite]} onPress={() => setCount(count => count+".")}>.</Text>
+            <Text style={[styles.button, styles.margin, styles.colorRed]} onPress={() => calResult()}>=</Text>
+          </View>
+        </View>
+      </SafeAreaView>
+    </>
+  );
+}
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    flexDirection: "column",
+    justifyContent: "flex-end",
+    backgroundColor: "#23222D",
+  },
+  display: {
+    flex: 1,
+    backgroundColor: "black",
+    justifyContent: "flex-end",
+    marginBottom: 30,
+    marginEnd: 20,
+    backgroundColor: "#23222D"
+  },
+  line: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    alignItems: "center",
+  },
+  buttons: {
+    flex: 1,
+    flexDirection: "column",
+    backgroundColor: "#2A2A36",
+    padding: 10,
+    justifyContent: "space-around",
+    borderTopStartRadius: 20,
+    borderTopEndRadius: 20,
+  },
+  button: {
+    flex: 1,
+    textAlign: "center",
+    fontSize: 22,
+    backgroundColor: "#282833",
+    padding: 25,
+    borderRadius: 100,
+  },
+  result: {
+    textAlign: "right",
+    color: "white",
+    fontSize: 50,
+  },
+  operetion: {
+    textAlign: "right",
+    color: "white",
+    fontSize: 30
+  },
+  colorWhite: {
+    color: "white",
+  },
+  colorGreen: {
+    color: "#00FFD7"
+  },
+  colorRed: {
+    color: "#FF6471"
+  },
+  margin: {
+    //borderWidth: 2   
+  }
+});
