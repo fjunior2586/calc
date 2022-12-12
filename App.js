@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, SafeAreaView, StatusBar, Dimensions, Component 
 import { FontAwesome } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { create, all } from 'mathjs'
+import { create, all, factorial } from 'mathjs'
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -104,6 +104,13 @@ export default function App() {
     
   }
 
+  async function factorial(){
+    calcResult();
+    console.log(result);
+    aux = math.factorial(parseInt(result));
+    setCount(aux);
+    setResult(aux);
+  }
 
 
   function writeCalc(digit) {
@@ -266,7 +273,7 @@ export default function App() {
           <View style={styles.buttonsCience}>
             <View style={styles.line}>
               <Text style={[styles.button1, styles.margin, styles.colorGreen]} onPress={() => removeCalc("|")}><AntDesign name="back" size={24} color="white" /></Text>
-              <Text style={[styles.button1, styles.margin, styles.colorGreen]} onPress={() => navigation.navigate("money")}>Rad</Text>
+              <Text style={[styles.button1, styles.margin, styles.colorGreen]} onPress={() => writeCalc('!')}>!</Text>
               <Text style={[styles.button1, styles.margin, styles.colorGreen]} onPress={() => writeCalc('√')}>√</Text>
               <Text style={[styles.button1, styles.margin, styles.colorRed]} onPress={() => clean('/')}>C</Text>
               <Text style={[styles.button1, styles.margin, styles.colorRed]} onPress={() => writeCalc('(')}>( )</Text>
